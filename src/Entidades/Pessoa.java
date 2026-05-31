@@ -1,7 +1,7 @@
 package Entidades;
 
 public abstract class Pessoa {
-    //Atributos protejidos para que a classe e seus filhos possam ter esses mesmos atributos
+    //Atributos protegidos para que a classe e seus filhos possam ter esses mesmos atributos
     protected String nome;
     protected Integer idade;
     protected String cpf;

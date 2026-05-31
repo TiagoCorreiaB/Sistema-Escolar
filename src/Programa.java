@@ -115,6 +115,11 @@ public class Programa {
 
     public static void visualizarProfessor(Scanner sc, ArrayList<Professor> professores){
 
+        if (professores == null){
+            System.out.println("Nenhum professor cadastrado");
+            return;
+        }
+
         System.out.println();
         System.out.println("Digite 1 para visualizar todos os professores");
         System.out.println("Digite 2 para visualizar um professor em especifico");
@@ -131,16 +136,19 @@ public class Programa {
         System.out.println();
         if (escolha == 1){
             for(Professor p : professores){
-                System.out.println(p.toString());
-                System.out.println("-------------------");
+                if (p != null) {
+                    System.out.println(p.toString());
+                    System.out.println("-------------------");
+                }
             }
+
         }
         else{
             System.out.print("Digite o cpf do professor que deseja visualizar: ");
             String cpf = sc.nextLine();
 
             for(Professor p : professores){
-                if(p.getCpf().equals(cpf)){
+                if(p != null && cpf.equals(p.getCpf())){
                     System.out.println(p.toString());
                 }
             }
