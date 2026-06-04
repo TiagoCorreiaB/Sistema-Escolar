@@ -52,7 +52,7 @@ public class Professor extends Pessoa implements Pagavel{
     public String toString() {
         return "Professor: " + nome +
                 "\nHorasTrabalhadas: " + horasTrabalhadas +
-                "\nMateria: " + materia +
+                "\nDiciplina: " + materia +
                 "\nSalário liquido: R$" + calcularSalarioLiquido();
     }
 }

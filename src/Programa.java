@@ -115,7 +115,7 @@ public class Programa {
 
     public static void visualizarProfessor(Scanner sc, ArrayList<Professor> professores){
 
-        if (professores == null){
+        if (professores.isEmpty()){
             System.out.println("Nenhum professor cadastrado");
             return;
         }
@@ -185,12 +185,15 @@ public class Programa {
                 System.out.print("Digite o novo email: ");
                 p.setEmail(sc.nextLine());
 
+                System.out.println("Digite a nova quantidade de horas trabalhadas: ");
+                p.setHorasTrabalhadas(sc.nextDouble());
+
                 System.out.println("Professor alterado");
                 return;
 
                 //Materia e cpf não devem ser alterados
                 //Materia diferente implica em um novo contrato
-                //CPF geralmente é validado por uma api antes da aprovação de sistemas
+                //CPF é geralmente validado por uma api antes da aprovação de sistemas
             }
         }
 
