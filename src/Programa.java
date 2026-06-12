@@ -29,8 +29,6 @@ public class Programa {
 
 
     // ------ CADASTROS -------
-
-
     public static Professor cadastroProfessor(Scanner sc, ArrayList<Materia> materia) {
         System.out.print("Digite o nome do professor: ");
         String nome = sc.nextLine();
@@ -100,8 +98,32 @@ public class Programa {
     }
 
     //Função para cadastrar Aluno
-    public static void cadastroAluno(){
+    public static Aluno cadastroAluno(Scanner sc) {
+            //Inserção das informações de aluno
+            System.out.print ("Digite o nome do aluno: ");
+            String nome = sc.nextLine();
 
+            System.out.print ("Digite a idade do aluno: ");
+            int idade = sc.nextInt();
+            sc.nextLine();
+
+            System.out.print ("Digite o CPF do aluno: ");
+            String cpf = sc.nextLine();
+
+            System.out.print ("Digite o email do aluno: ");
+            String email = sc.nextLine();
+
+            System.out.print ("Digite a primeira nota: ");
+            Double nota1 = sc.nextDouble();
+
+            System.out.print ("Digite a segunda nota: ");
+            Double nota2 = sc.nextDouble();
+
+            System.out.print ("Digite a terceira nota: ");
+            Double nota3 = sc.nextDouble();
+            sc.nextLine();
+
+            return new Aluno (nome, idade, cpf, email, nota1, nota2, nota3);
     }
 
     //Função para cadastrar Funcionario
@@ -157,9 +179,55 @@ public class Programa {
 
     }
 
-    public static void visualizarAluno(){
+    public static void visualizarAluno(Scanner sc, ArrayList<Aluno> alunos){
 
-    }
+            // Caso não haja nenhum objeto de aluno
+            if (alunos.isEmpty()){
+                System.out.println("Nenhum aluno cadastrado");
+                return;
+            }
+
+            int escolha;
+
+            //Escolha de tipo de vizualização de aluno
+            System.out.println("Digite 1 para visualizar todos os alunos");
+            System.out.print("Digite 2 para visualizar um aluno em específico");
+            escolha = sc.nextInt();
+
+            //Conduz o usuário a não digitar um numero diferente das alternativas
+            while (escolha > 2 || escolha < 1){
+                System.out.print("Digite 1 ou 2 apenas: ");
+                escolha = sc.nextInt();
+            }
+
+            sc.nextLine();
+            System.out.println();
+
+            //Exibição de todos os alunos conforme a alternativa escolhida
+            if (escolha == 1){
+                for(Aluno a : alunos){
+                    if (a != null) {
+                        System.out.println(a.toString());
+                        System.out.println("--------------------------------");
+                    }
+                }
+            }
+            //Exibição de um aluno específico através de busca por CPF conforme a alternativa escolhida
+            else {
+                System.out.print("Digite o cpf do aluno que deseja visualizar: ");
+                String cpf = sc.nextLine();
+
+                for(Aluno a : alunos){
+                    if(a != null && a.getCpf().equals(cpf)){
+                        System.out.println("\n" + a.toString());
+                        return; // Encontrou o aluno, encerra o método
+                    }
+                }
+
+                //Caso não haja um objeto de aluno cadastrado com o CPF inserido
+                System.out.println("Aluno não encontrado com o CPF informado.");
+            }
+        }
 
     public static void visualizarFuncionario(){
 
@@ -200,7 +268,86 @@ public class Programa {
         System.out.println("Professor não encontrado");
     }
 
-    public static void alterarAluno(){}
+    public static void alterarAluno(Scanner sc, ArrayList<Aluno> alunos){
+
+        //Busca o aluno o através do CPF para realizar alterações
+        System.out.print("Digite o cpf do aluno que deseja alterar: ");
+        String cpf = sc.nextLine();
+
+        for(Aluno a : alunos){
+            if(a.getCpf().equals(cpf)){
+                int escolha;
+
+                //Menu de escolha para qual informação deseja alterar
+                do {
+                    System.out.println(" ---------------------------- ");
+                    System.out.println("| ESCOLHA O QUE ALTERAR      |");
+                    System.out.println(" ---------------------------- ");
+                    System.out.println("| 1 - Nome                   |");
+                    System.out.println("| 2 - Idade                  |");
+                    System.out.println("| 3 - Email                  |");
+                    System.out.println("| 4 - Nota 1                 |");
+                    System.out.println("| 5 - Nota 2                 |");
+                    System.out.println("| 6 - Nota 3                 |");
+                    System.out.println("| 7 - Voltar                 |");
+                    System.out.println(" ---------------------------- ");
+                    System.out.print("Escolha: ");
+
+                    escolha = sc.nextInt();
+                    sc.nextLine();
+
+                    //Conduz o usuário a não digitar um numero diferente das alternativas
+                    while (escolha > 7 || escolha < 1){
+                        System.out.print("Digite de 1 a 7 apenas: ");
+                        escolha = sc.nextInt();
+                        sc.nextLine();
+                    }
+
+                    //Inserção das novas informações com base na escolha selecionada no menu
+                    switch(escolha){
+                        case 1:
+                            System.out.print("Digite o novo nome: ");
+                            a.setNome(sc.nextLine());
+                            break;
+                        case 2:
+                            System.out.print("Digite a nova idade: ");
+                            a.setIdade(sc.nextInt());
+                            sc.nextLine();
+                            break;
+                        case 3:
+                            System.out.print("Digite o novo email: ");
+                            a.setEmail(sc.nextLine());
+                            break;
+                        case 4:
+                            System.out.print("Digite a nova nota 1: ");
+                            a.setNota1(sc.nextDouble());
+                            sc.nextLine();
+                            break;
+                        case 5:
+                            System.out.print("Digite a nova nota 2: ");
+                            a.setNota2(sc.nextDouble());
+                            sc.nextLine();
+                            break;
+                        case 6:
+                            System.out.print("Digite a nova nota 3: ");
+                            a.setNota3(sc.nextDouble());
+                            sc.nextLine();
+                            break;
+                        case 7:
+                            break;
+                    }
+                } while(escolha != 7);
+
+                return;
+            }
+        }
+
+        //Caso não haja um objeto de aluno com o CPF inserido
+        System.out.println("Aluno não encontrado");
+    }
+
+    public static void alterarFuncionario(){}
+
 
     public static void alterarFuncionario(){}
 
@@ -223,9 +370,30 @@ public class Programa {
         System.out.println("Professor não encontrado");
     }
 
-    static void excluirAluno(){}
+    static void excluirAluno(Scanner sc, ArrayList<Aluno> alunos) {
+        // Caso não haja nenhum objeto de aluno
+        if (alunos.isEmpty()){
+            System.out.println("Nenhum aluno cadastrado");
+            return;
+        }
 
-    static void excluirFuncionario(){}
+        //Busca o aluno o através do CPF para realizar a exclusão dele
+        System.out.print("Digite o cpf do aluno que deseja excluir: ");
+        String cpf = sc.nextLine();
+
+        for(int i = 0; i < alunos.size(); i++){
+            if(alunos.get(i).getCpf().equals(cpf)){
+                alunos.remove(i);
+                System.out.println("Aluno removido");
+                return;
+            }
+        }
+
+        //Caso não haja um objeto de aluno com o CPF inserido
+        System.out.println("Aluno não encontrado");
+    }
+
+static void excluirFuncionario(){}
 
 
     public static void main(String[] args){
@@ -234,6 +402,8 @@ public class Programa {
         ArrayList<Materia> materia = cadastroMateria();
 
         ArrayList<Professor> listaProfessores = new ArrayList<>();
+
+        ArrayList<Aluno> listaAlunos = new ArrayList<>();
 
         System.out.println("---- Bem vindo ao sistema de cadastro escolar ----");
 
@@ -266,8 +436,9 @@ public class Programa {
             switch (escolha){
                 case 1:
                     switch (tipo){
-                        case 1: cadastroAluno();
-                            break;
+                        case 1: Aluno novoAluno = cadastroAluno(sc);
+                        listaAlunos.add (novoAluno);
+                        break;
 
                         case 2:  Professor novoProfessor = cadastroProfessor(sc, materia);
                                 listaProfessores.add(novoProfessor); //Sempre adicionado um novo professor a lista
@@ -281,7 +452,7 @@ public class Programa {
 
                 case 2:
                     switch (tipo){
-                        case 1: visualizarAluno();
+                        case 1: visualizarAluno(sc, listaAlunos);
                             break;
 
                         case 2: visualizarProfessor(sc, listaProfessores);
@@ -294,7 +465,7 @@ public class Programa {
 
                 case 3:
                     switch (tipo){
-                        case 1: alterarAluno();
+                        case 1: alterarAluno(sc, listaAlunos);
                             break;
 
                         case 2: alterarProfessor(sc, listaProfessores);
@@ -307,7 +478,7 @@ public class Programa {
 
                 case 4:
                     switch (tipo){
-                        case 1: excluirAluno();
+                        case 1: excluirAluno(sc, listaAlunos);
                             break;
 
                         case 2: excluirProfessor(sc, listaProfessores);
