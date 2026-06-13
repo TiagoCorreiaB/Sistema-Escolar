@@ -1,13 +1,11 @@
 package Entidades;
 
-public class Professor extends Pessoa implements Pagavel{
+public class Professor extends Funcionario {
 
-    private Double horasTrabalhadas;
     private Materia materia;
 
-    public Professor(String nome, Integer idade, String cpf, String email, Double horasTrabalhadas, Materia materia) {
-        super(nome, idade, cpf, email);
-        this.horasTrabalhadas = horasTrabalhadas;
+    public Professor(String nome, Integer idade, String cpf, String email, Double horasTrabalhadas, StatusFuncionario status, Materia materia) {
+        super(nome, idade, cpf, email, horasTrabalhadas, status);
         this.materia = materia;
     }
 
@@ -27,16 +25,6 @@ public class Professor extends Pessoa implements Pagavel{
     public Double calcularSalarioLiquido(){
 
         return  calcularSalarioBruto() - adicionarImposto(); // Salario inicial menos o imposto sob ele
-    }
-
-    public Double getHorasTrabalhadas() {
-
-        return horasTrabalhadas;
-    }
-
-    public void setHorasTrabalhadas(Double horasTrabalhadas) {
-
-        this.horasTrabalhadas = horasTrabalhadas;
     }
 
     public Materia getMateria() {

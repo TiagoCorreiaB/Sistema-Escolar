@@ -71,7 +71,7 @@ public class Programa {
         Professor professor = null;
         for (Materia m : materia) {
             if (m.getIdMateria().equals(disciplina)) {
-                professor = new Professor(nome, idade, cpf, email, horas, m);
+                professor = new Professor(nome, idade, cpf, email, horas, StatusFuncionario.ATIVO,m);
                 m.adicionarProfessor(professor);
             }
         }
@@ -127,8 +127,29 @@ public class Programa {
     }
 
     //Função para cadastrar Funcionario
-    public static void cadastroFuncionario(){
+    public static Funcionario cadastroFuncionario(Scanner sc){
+        System.out.print("Digite o nome do funcionário: ");
+        String nome = sc.nextLine();
 
+        System.out.print("Digite a idade do funcionário: ");
+        int idade = sc.nextInt();
+
+        sc.nextLine();
+
+        System.out.print("Digite o CPF do funcionário: ");
+        String cpf = sc.nextLine();
+
+        System.out.print("Digite o email do funcionário: ");
+        String email = sc.nextLine();
+
+        System.out.print("Digite a carga horaria deste funcionário (em horas): ");
+        double horas = sc.nextDouble();
+
+        System.out.print("Digite o valor-hora deste funcionário (em horas): ");
+        double valor = sc.nextDouble();
+
+        Funcionario funcionario = new Funcionario(nome, idade, cpf, email, horas, valor, StatusFuncionario.ATIVO);
+        return funcionario;
     }
 
 
@@ -229,14 +250,52 @@ public class Programa {
             }
         }
 
-    public static void visualizarFuncionario(){
+    public static void visualizarFuncionario(Scanner sc, ArrayList<Funcionario> funcionarios){
+        if (funcionarios.isEmpty()){
+            System.out.println("Nenhum funcionário cadastrado");
+            return;
+        }
 
+        System.out.println();
+        System.out.println("Digite 1 para visualizar todos os funcionários");
+        System.out.println("Digite 2 para visualizar um funcionário em especifico");
+        System.out.print("Escolha: ");
+        int escolha = sc.nextInt();
+
+        while (escolha > 2 || escolha < 1){
+            System.out.print("Digite 1 ou 2 apenas: ");
+            escolha = sc.nextInt();
+        }
+
+        sc.nextLine();
+
+        System.out.println();
+        if (escolha == 1){
+            for(Funcionario f : funcionarios){
+                if (f != null) {
+                    System.out.println(f.toString());
+                    System.out.println("-------------------");
+                }
+            }
+
+        }
+        else{
+            System.out.print("Digite o cpf do funcionário que deseja visualizar: ");
+            String cpf = sc.nextLine();
+
+            for(Funcionario f : funcionarios){
+                if(f != null && cpf.equals(f.getCpf())){
+                    System.out.println(f.toString());
+                }
+            }
+
+        }
     }
 
     // ------ ALTERADORES -------
 
 
-    static void alterarProfessor(Scanner sc, ArrayList<Professor> professores){
+    public static void alterarProfessor(Scanner sc, ArrayList<Professor> professores){
 
         System.out.print("Digite o cpf do professor que deseja alterar: ");
         String cpf = sc.nextLine();
@@ -346,10 +405,36 @@ public class Programa {
         System.out.println("Aluno não encontrado");
     }
 
-    public static void alterarFuncionario(){}
+    public static void alterarFuncionario(Scanner sc, ArrayList<Funcionario> funcionarios){
+        System.out.print("Digite o cpf do funcionario que deseja alterar: ");
+        String cpf = sc.nextLine();
 
+        for(Funcionario f : funcionarios){
+            if(f.getCpf().equals(cpf)){
+                System.out.print("Digite o novo nome: ");
+                f.setNome(sc.nextLine());
 
-    public static void alterarFuncionario(){}
+                System.out.print("Digite a nova idade: ");
+                f.setIdade(sc.nextInt());
+                sc.nextLine();
+
+                System.out.print("Digite o novo email: ");
+                f.setEmail(sc.nextLine());
+
+                System.out.println("Digite a nova quantidade de horas trabalhadas: ");
+                f.setHorasTrabalhadas(sc.nextDouble());
+
+                System.out.println("Digite o novo valor-hora do funcionário: ");
+                f.setValorHora(sc.nextDouble());
+
+                System.out.println("Funcionário alterado");
+                return;
+
+            }
+        }
+
+        System.out.println("Professor não encontrado");
+    }
 
 
     // ------ EXCLUSÕES -------
@@ -393,8 +478,25 @@ public class Programa {
         System.out.println("Aluno não encontrado");
     }
 
-static void excluirFuncionario(){}
+    public static void excluirFuncionario(Scanner sc, ArrayList<Funcionario> funcionarios){
+        if (funcionarios.isEmpty()){
+            System.out.println("Nenhum funcionário cadastrado");
+            return;
+        }
 
+        System.out.print("Digite o cpf do funcionário que deseja excluir: ");
+        String cpf = sc.nextLine();
+
+        for(int i = 0; i < funcionarios.size(); i++){
+            if(funcionarios.get(i).getCpf().equals(cpf)){
+                funcionarios.remove(i);
+                System.out.println("Funcionário removido");
+                return;
+            }
+        }
+
+        System.out.println("Funcionário não encontrado");
+    }
 
     public static void main(String[] args){
 
@@ -404,6 +506,8 @@ static void excluirFuncionario(){}
         ArrayList<Professor> listaProfessores = new ArrayList<>();
 
         ArrayList<Aluno> listaAlunos = new ArrayList<>();
+
+        ArrayList<Funcionario> listaFuncionarios = new ArrayList<>();
 
         System.out.println("---- Bem vindo ao sistema de cadastro escolar ----");
 
@@ -437,7 +541,7 @@ static void excluirFuncionario(){}
                 case 1:
                     switch (tipo){
                         case 1: Aluno novoAluno = cadastroAluno(sc);
-                        listaAlunos.add (novoAluno);
+                        listaAlunos.add(novoAluno);
                         break;
 
                         case 2:  Professor novoProfessor = cadastroProfessor(sc, materia);
@@ -445,7 +549,8 @@ static void excluirFuncionario(){}
 
                             break;
 
-                        case 3: cadastroFuncionario();
+                        case 3: Funcionario novoFuncionario = cadastroFuncionario(sc);
+                        listaFuncionarios.add(novoFuncionario);
                             break;
                     }
                     break;
@@ -458,7 +563,7 @@ static void excluirFuncionario(){}
                         case 2: visualizarProfessor(sc, listaProfessores);
                             break;
 
-                        case 3: visualizarFuncionario();
+                        case 3: visualizarFuncionario(sc, listaFuncionarios);
                             break;
                     }
                     break;
@@ -471,7 +576,7 @@ static void excluirFuncionario(){}
                         case 2: alterarProfessor(sc, listaProfessores);
                             break;
 
-                        case 3: alterarFuncionario();
+                        case 3: alterarFuncionario(sc, listaFuncionarios);
                             break;
                     }
                     break;
@@ -484,7 +589,7 @@ static void excluirFuncionario(){}
                         case 2: excluirProfessor(sc, listaProfessores);
                             break;
 
-                        case 3: excluirFuncionario();
+                        case 3: excluirFuncionario(sc, listaFuncionarios);
                             break;
                     }
                     break;

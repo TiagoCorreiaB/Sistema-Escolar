@@ -1,23 +1,74 @@
 package Entidades;
 
-public class Funcionario {
-    //Aplicar polimorfismo em funcionario dividindo mais classes com tipos de funcionairos (areas) ex: Funcionario f = new Secretaria();
-    //Utilizar enum assim:
-    //    public enum StatusFuncionario {
-    //    ATIVO,
-    //    FERIAS,
-    //    AFASTADO,
-    //    DESLIGADO
+public class Funcionario extends Pessoa implements Pagavel {
+    protected Double horasTrabalhadas;
+    private Double valorHora;
+    protected StatusFuncionario status;
 
-    //}Ou assim:
-    //    public enum Departamento {
-    //    RH,
-    //    FINANCEIRO,
-    //    TI,
-    //    MARKETING
-    //}
+    public Funcionario(String nome, Integer idade, String cpf, String email, Double horasTrabalhadas, Double valorHora, StatusFuncionario status) {
+        super(nome, idade, cpf, email);
+        this.horasTrabalhadas = horasTrabalhadas;
+        this.valorHora = valorHora;
+        this.status = status;
+    }
 
+    public Funcionario(String nome, Integer idade, String cpf, String email, Double horasTrabalhadas, StatusFuncionario status) {
+        super(nome, idade, cpf, email);
+        this.horasTrabalhadas = horasTrabalhadas;
+        this.status = status;
+    }
 
-    //A classe extende pessoa e implementa Pagavevel
+    @Override
+    public Double calcularSalarioBruto(){
 
+        return this.horasTrabalhadas * this.valorHora; //Horas * valor que a materia paga
+    }
+
+    @Override
+    public Double adicionarImposto(){
+
+        return calcularSalarioBruto() * 0.075; //7,5% de imposto
+    }
+
+    @Override
+    public Double calcularSalarioLiquido(){
+
+        return  calcularSalarioBruto() - adicionarImposto(); // Salario inicial menos o imposto sob ele
+    }
+
+    public StatusFuncionario getStatus() {
+        return status;
+    }
+
+    public void setStatus(StatusFuncionario status) {
+        this.status = status;
+    }
+
+    public Double getHorasTrabalhadas() {
+        return horasTrabalhadas;
+    }
+
+    public void setHorasTrabalhadas(Double horasTrabalhadas) {
+        this.horasTrabalhadas = horasTrabalhadas;
+    }
+
+    public Double getValorHora() {
+        return valorHora;
+    }
+
+    public void setValorHora(Double valorHora) {
+        this.valorHora = valorHora;
+    }
+
+    @Override
+    public String toString() {
+        return "Funcionario{" +
+                "status=" + status +
+                ", horasTrabalhadas=" + horasTrabalhadas +
+                ", nome='" + nome + '\'' +
+                ", idade=" + idade +
+                ", cpf='" + cpf + '\'' +
+                ", email='" + email + '\'' +
+                '}';
+    }
 }
