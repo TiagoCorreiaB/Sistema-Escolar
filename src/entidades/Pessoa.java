@@ -1,6 +1,6 @@
 package entidades;
 
-public abstract class Pessoa {
+public abstract class Pessoa implements Comparable<Pessoa> {
     //Atributos protegidos para que a classe e seus filhos possam ter esses mesmos atributos
     protected String nome;
     protected Integer idade;
@@ -67,7 +67,17 @@ public abstract class Pessoa {
     @Override
     // Retorna os dados da pessoa como texto
     public String toString() {
-        return nome + "  |  " + idade + "  |  " + cpf + "  |  " + email;
+        return "Pessoa{" +
+                "nome='" + nome + '\'' +
+                ", idade=" + idade +
+                ", cpf='" + cpf + '\'' +
+                ", email='" + email + '\'' +
+                '}';
     }
 
+    @Override
+    // Compara pessoas pelo nome, permitindo a ordenação em ordem alfabética
+    public int compareTo(Pessoa outra) {
+        return this.nome.compareToIgnoreCase(outra.getNome());
+    }
 }

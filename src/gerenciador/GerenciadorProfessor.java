@@ -76,29 +76,34 @@ public class GerenciadorProfessor implements Gerenciador {
             return;
         }
 
-        System.out.println("-------------------------------------------------------");
-        System.out.println("| Digite 1 para visualizar todos os professores       |");
-        System.out.println("| Digite 2 para visualizar um professor em específico |");
-        System.out.println("-------------------------------------------------------");
+        System.out.println("--------------------------------------------------------");
+        System.out.println("| Digite 1 para visualizar todos os professores        |");
+        System.out.println("| Digite 2 para visualizar um professor em específico  |");
+        System.out.println("| Digite 3 para visualizar em ordem alfabética         |");
+        System.out.println("--------------------------------------------------------");
         System.out.print("Escolha: ");
         int escolha = sc.nextInt();
 
-        while (escolha > 2 || escolha < 1){
-            System.out.print("Digite 1 ou 2 apenas: ");
+        while (escolha > 3 || escolha < 1){
+            System.out.print("Digite 1, 2 ou 3 apenas: ");
             escolha = sc.nextInt();
         }
 
         sc.nextLine();
-
         System.out.println();
-        if (escolha == 1){
+        if (escolha == 1 || escolha == 3){
+            List<Professor> lista = new java.util.ArrayList<>(professores);
+            if (escolha == 3) {
+                java.util.Collections.sort(lista);
+            }
+
             System.out.println("NOME  |  IDADE  |  CPF  |  EMAIL  |  DISCIPLINA  |  STATUS  |  HORAS  |  SALÁRIO LÍQ.");
             System.out.println("---------------------------------------------------------------------------------------------------------------------------------------");
-            for(Professor professor : professores){
-                System.out.println(professor);
+            for(Professor p : lista){
+                System.out.println(p.toString());
             }
         }
-        else{
+        else {
             System.out.print("Digite o CPF do professor que deseja visualizar: ");
             String cpf = sc.nextLine();
 

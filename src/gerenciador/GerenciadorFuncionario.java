@@ -52,26 +52,32 @@ public class GerenciadorFuncionario implements Gerenciador {
         System.out.println("---------------------------------------------------------");
         System.out.println("| Digite 1 para visualizar todos os funcionários        |");
         System.out.println("| Digite 2 para visualizar um funcionário em específico |");
+        System.out.println("| Digite 3 para visualizar em ordem alfabética          |");
         System.out.println("---------------------------------------------------------");
         System.out.print("Escolha: ");
         int escolha = sc.nextInt();
 
-        while (escolha > 2 || escolha < 1){
-            System.out.print("Digite 1 ou 2 apenas: ");
+        while (escolha > 3 || escolha < 1){
+            System.out.print("Digite 1, 2 ou 3 apenas: ");
             escolha = sc.nextInt();
         }
 
         sc.nextLine();
 
         System.out.println();
-        if (escolha == 1){
+        if (escolha == 1 || escolha == 3){
+            List<Funcionario> lista = new java.util.ArrayList<>(funcionarios);
+            if (escolha == 3) {
+                java.util.Collections.sort(lista);
+            }
+
             System.out.println("NOME  |  IDADE  |  CPF  |  EMAIL  |  STATUS  |  HORAS  |  VALOR/HR  |  SALÁRIO LÍQ.");
             System.out.println("----------------------------------------------------------------------------------------------------------------------------------");
-            for(Funcionario funcionario : funcionarios){
-                System.out.println(funcionario);
+            for(Funcionario f : lista){
+                System.out.println(f.toString());
             }
         }
-        else{
+        else {
             System.out.print("Digite o CPF do funcionário que deseja visualizar: ");
             String cpf = sc.nextLine();
 

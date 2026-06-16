@@ -56,23 +56,29 @@ public class GerenciadorAluno implements Gerenciador {
         System.out.println("---------------------------------------------------");
         System.out.println("| Digite 1 para visualizar todos os alunos        |");
         System.out.println("| Digite 2 para visualizar um aluno em específico |");
+        System.out.println("| Digite 3 para visualizar em ordem alfabética    |");
         System.out.println("---------------------------------------------------");
         System.out.print("Escolha: ");
         escolha = sc.nextInt();
 
-        while (escolha > 2 || escolha < 1){
-            System.out.print("Digite 1 ou 2 apenas: ");
+        while (escolha > 3 || escolha < 1){
+            System.out.print("Digite 1, 2 ou 3 apenas: ");
             escolha = sc.nextInt();
         }
 
         sc.nextLine();
         System.out.println();
 
-        if (escolha == 1){
+        if (escolha == 1 || escolha == 3){
+            List<Aluno> lista = new java.util.ArrayList<>(alunos);
+            if (escolha == 3) {
+                java.util.Collections.sort(lista);
+            }
+
             System.out.println("NOME  |  IDADE  |  CPF  |  EMAIL  |  NOTA 1  |  NOTA 2  |  NOTA 3  |  MÉDIA");
             System.out.println("---------------------------------------------------------------------------------------------------------------");
-            for(Aluno aluno : alunos){
-                System.out.println(aluno);
+            for(Aluno aluno : lista){
+                System.out.println(aluno.toString());
             }
         }
         else {
