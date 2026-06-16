@@ -49,7 +49,8 @@ public class GerenciadorAluno implements Gerenciador {
         System.out.println("---------------------------------------------------");
         System.out.println("| Digite 1 para visualizar todos os alunos        |");
         System.out.println("| Digite 2 para visualizar um aluno em específico |");
-        System.out.print("---------------------------------------------------");
+        System.out.println("---------------------------------------------------");
+        System.out.print("Escolha: ");
         escolha = sc.nextInt();
 
         while (escolha > 2 || escolha < 1){

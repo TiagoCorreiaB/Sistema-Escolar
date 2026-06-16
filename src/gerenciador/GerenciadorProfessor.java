@@ -75,7 +75,8 @@ public class GerenciadorProfessor implements Gerenciador {
         System.out.println("-------------------------------------------------------");
         System.out.println("| Digite 1 para visualizar todos os professores       |");
         System.out.println("| Digite 2 para visualizar um professor em específico |");
-        System.out.print("-------------------------------------------------------");
+        System.out.println("-------------------------------------------------------");
+        System.out.print("Escolha: ");
         int escolha = sc.nextInt();
 
         while (escolha > 2 || escolha < 1){
