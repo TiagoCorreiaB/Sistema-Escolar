@@ -1,4 +1,4 @@
-package Entidades;
+package entidades;
 
 public abstract class Pessoa {
     //Atributos protegidos para que a classe e seus filhos possam ter esses mesmos atributos

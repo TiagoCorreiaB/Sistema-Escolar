@@ -1,4 +1,4 @@
-package Entidades;
+package entidades.empregados;
 
 public interface Pagavel {
     Double calcularSalarioBruto();

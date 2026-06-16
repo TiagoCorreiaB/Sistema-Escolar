@@ -1,4 +1,4 @@
-package Entidades;
+package entidades;
 
 //Classe Aluno herda atributos e comportamentos da classe Pessoa via extends
 public class Aluno extends Pessoa {
@@ -53,11 +53,16 @@ public class Aluno extends Pessoa {
     //Sobrescreve o toString() da classe Object
     @Override
     public String toString () {
-        return "Aluno{" + nome +
-                "\nNota 1 =" + nota1 +
-                "\nNota 2 =" + nota2 +
-                "\nNota 3 =" + nota3 +
-                "\nMedia =" + media +
-                '}';
+        return "========== ALUNO ==========" +
+                "\nNome: " + nome +
+                "\nIdade: " + idade +
+                "\nCPF: " + cpf +
+                "\nEmail: " + email +
+                "\n--------------------------" +
+                "\nNota 1: " + nota1 +
+                "\nNota 2: " + nota2 +
+                "\nNota 3: " + nota3 +
+                "\nMédia: "+ media +
+                "\n===========================";
     }
 }

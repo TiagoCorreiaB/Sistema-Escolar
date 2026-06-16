@@ -1,4 +1,4 @@
-package Entidades;
+package entidades.empregados.professor;
 
 import java.util.ArrayList;
 
@@ -58,7 +58,6 @@ public class Materia {
 
     @Override
     public String toString() {
-        return  nome + '\'' +
-                ", valorHora=" + valorHora;
+        return nome + "(R$" + valorHora + "/hora)";
     }
 }
