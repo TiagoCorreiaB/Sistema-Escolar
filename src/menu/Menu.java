@@ -10,6 +10,8 @@ public class Menu {
     private Gerenciador gerenciadorProfessor;
     private Scanner sc;
 
+    // Construtor do Menu
+    // Recebe as instâncias dos gerenciadores de cada tipo
     public Menu(Gerenciador gerenciadorAluno, Gerenciador gerenciadorFuncionario, Gerenciador gerenciadorProfessor, Scanner sc) {
         this.gerenciadorAluno = gerenciadorAluno;
         this.gerenciadorFuncionario = gerenciadorFuncionario;
@@ -17,6 +19,8 @@ public class Menu {
         this.sc = sc;
     }
 
+    // Inicia o loop principal do sistema
+    // Exibe menus e roteia a escolha para o gerenciador correspondente
     public void iniciar(){
         int tipo, opcao;
 

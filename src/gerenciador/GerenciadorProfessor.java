@@ -4,18 +4,21 @@ import entidades.empregados.Status;
 import entidades.empregados.professor.Materia;
 import entidades.empregados.professor.Professor;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class GerenciadorProfessor implements Gerenciador {
-    private List<Professor> professores = new ArrayList<>();
+    private List<Professor> professores;
     private List<Materia> materias;
 
-    public GerenciadorProfessor(List<Materia> materias) {
+    // Construtor do Gerenciador de Professores
+    // Recebe a lista de matérias para vínculo e a lista de professores inicial
+    public GerenciadorProfessor(List<Materia> materias, List<Professor> professores) {
         this.materias = materias;
+        this.professores = professores;
     }
 
+    // Lê os dados do terminal e vincula o novo professor a uma matéria
     @Override
     public void cadastrar(Scanner sc) {
         System.out.print("Digite o nome do professor: ");
@@ -65,6 +68,7 @@ public class GerenciadorProfessor implements Gerenciador {
         }
     }
 
+    // Exibe todos os professores formatados ou busca por um CPF específico
     @Override
     public void visualizar(Scanner sc) {
         if (professores.isEmpty()){
@@ -88,11 +92,11 @@ public class GerenciadorProfessor implements Gerenciador {
 
         System.out.println();
         if (escolha == 1){
+            System.out.println("NOME  |  IDADE  |  CPF  |  EMAIL  |  DISCIPLINA  |  STATUS  |  HORAS  |  SALÁRIO LÍQ.");
+            System.out.println("---------------------------------------------------------------------------------------------------------------------------------------");
             for(Professor professor : professores){
                 System.out.println(professor);
-                System.out.println("-------------------");
             }
-
         }
         else{
             System.out.print("Digite o CPF do professor que deseja visualizar: ");
@@ -109,6 +113,7 @@ public class GerenciadorProfessor implements Gerenciador {
         }
     }
 
+    // Busca o professor por CPF e exibe um sub-menu para editar seus atributos
     @Override
     public void alterar(Scanner sc) {
         if (professores.isEmpty()){
@@ -172,14 +177,13 @@ public class GerenciadorProfessor implements Gerenciador {
                             System.out.println("| 1 - ATIVO                  |");
                             System.out.println("| 2 - FÉRIAS                 |");
                             System.out.println("| 3 - AFASTADO               |");
-                            System.out.println("| 4 - DESLIGADO              |");
                             System.out.println(" ---------------------------- ");
                             System.out.print("Escolha o status: ");
 
                             int escolhaStatus = sc.nextInt();
                             sc.nextLine();
 
-                            while (escolhaStatus > 4 || escolhaStatus < 1) {
+                            while (escolhaStatus > 3 || escolhaStatus < 1) {
                                 System.out.print("Digite de 1 a 4 apenas: ");
                                 escolhaStatus = sc.nextInt();
                                 sc.nextLine();
@@ -194,9 +198,6 @@ public class GerenciadorProfessor implements Gerenciador {
                                     break;
                                 case 3:
                                     professor.setStatus(Status.AFASTADO);
-                                    break;
-                                case 4:
-                                    professor.setStatus(Status.DESLIGADO);
                                     break;
                             }
                             break;
@@ -213,6 +214,7 @@ public class GerenciadorProfessor implements Gerenciador {
         System.out.println("Professor não encontrado.");
     }
 
+    // Busca o professor por CPF e o remove permanentemente da lista
     @Override
     public void excluir(Scanner sc) {
         if (professores.isEmpty()){

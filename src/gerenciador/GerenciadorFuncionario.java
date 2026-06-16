@@ -3,13 +3,19 @@ package gerenciador;
 import entidades.empregados.funcionario.Funcionario;
 import entidades.empregados.Status;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class GerenciadorFuncionario implements Gerenciador {
-    private List<Funcionario> funcionarios = new ArrayList<>();
+    private List<Funcionario> funcionarios;
 
+    // Construtor do Gerenciador de Funcionários
+    // Recebe a lista inicial para gerenciar
+    public GerenciadorFuncionario(List<Funcionario> funcionarios) {
+        this.funcionarios = funcionarios;
+    }
+
+    // Implementa a lógica de cadastro lendo os dados do terminal
     @Override
     public void cadastrar(Scanner sc) {
         System.out.print("Digite o nome do funcionário: ");
@@ -35,6 +41,7 @@ public class GerenciadorFuncionario implements Gerenciador {
         funcionarios.add(new Funcionario(nome, idade, cpf, email, horas, valor, Status.ATIVO));
     }
 
+    // Exibe todos os funcionários formatados ou busca por um CPF específico
     @Override
     public void visualizar(Scanner sc) {
         if (funcionarios.isEmpty()){
@@ -58,11 +65,11 @@ public class GerenciadorFuncionario implements Gerenciador {
 
         System.out.println();
         if (escolha == 1){
+            System.out.println("NOME  |  IDADE  |  CPF  |  EMAIL  |  STATUS  |  HORAS  |  VALOR/HR  |  SALÁRIO LÍQ.");
+            System.out.println("----------------------------------------------------------------------------------------------------------------------------------");
             for(Funcionario funcionario : funcionarios){
                 System.out.println(funcionario);
-                System.out.println("-------------------");
             }
-
         }
         else{
             System.out.print("Digite o CPF do funcionário que deseja visualizar: ");
@@ -79,6 +86,7 @@ public class GerenciadorFuncionario implements Gerenciador {
         }
     }
 
+    // Busca o funcionário por CPF e exibe um sub-menu para editar seus atributos
     @Override
     public void alterar(Scanner sc) {
         if (funcionarios.isEmpty()){
@@ -148,14 +156,13 @@ public class GerenciadorFuncionario implements Gerenciador {
                             System.out.println("| 1 - ATIVO                  |");
                             System.out.println("| 2 - FÉRIAS                 |");
                             System.out.println("| 3 - AFASTADO               |");
-                            System.out.println("| 4 - DESLIGADO              |");
                             System.out.println(" ---------------------------- ");
                             System.out.print("Escolha o status: ");
 
                             int escolhaStatus = sc.nextInt();
                             sc.nextLine();
 
-                            while (escolhaStatus > 4 || escolhaStatus < 1) {
+                            while (escolhaStatus > 3 || escolhaStatus < 1) {
                                 System.out.print("Digite de 1 a 4 apenas: ");
                                 escolhaStatus = sc.nextInt();
                                 sc.nextLine();
@@ -171,9 +178,6 @@ public class GerenciadorFuncionario implements Gerenciador {
                                 case 3:
                                     funcionario.setStatus(Status.AFASTADO);
                                     break;
-                                case 4:
-                                    funcionario.setStatus(Status.DESLIGADO);
-                                    break;
                             }
                             break;
                         case 7:
@@ -188,6 +192,7 @@ public class GerenciadorFuncionario implements Gerenciador {
         System.out.println("Funcionário não encontrado.");
     }
 
+    // Busca o funcionário por CPF e o remove permanentemente da lista
     @Override
     public void excluir(Scanner sc) {
         if (funcionarios.isEmpty()){

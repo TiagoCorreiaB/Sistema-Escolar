@@ -2,13 +2,19 @@ package gerenciador;
 
 import entidades.Aluno;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class GerenciadorAluno implements Gerenciador {
-    private List<Aluno> alunos = new ArrayList<>();
+    private List<Aluno> alunos;
 
+    // Construtor do Gerenciador de Alunos
+    // Recebe a lista inicial para gerenciar
+    public GerenciadorAluno(List<Aluno> alunos) {
+        this.alunos = alunos;
+    }
+
+    // Implementa a lógica de cadastro lendo os dados do terminal
     @Override
     public void cadastrar(Scanner sc) {
         System.out.print ("Digite o nome do aluno: ");
@@ -37,6 +43,7 @@ public class GerenciadorAluno implements Gerenciador {
         alunos.add(new Aluno (nome, idade, cpf, email, nota1, nota2, nota3));
     }
 
+    // Exibe todos os alunos formatados ou busca por um CPF específico
     @Override
     public void visualizar(Scanner sc) {
         if (alunos.isEmpty()){
@@ -62,9 +69,10 @@ public class GerenciadorAluno implements Gerenciador {
         System.out.println();
 
         if (escolha == 1){
+            System.out.println("NOME  |  IDADE  |  CPF  |  EMAIL  |  NOTA 1  |  NOTA 2  |  NOTA 3  |  MÉDIA");
+            System.out.println("---------------------------------------------------------------------------------------------------------------");
             for(Aluno aluno : alunos){
                 System.out.println(aluno);
-                System.out.println("--------------------------------");
             }
         }
         else {
@@ -82,6 +90,7 @@ public class GerenciadorAluno implements Gerenciador {
         }
     }
 
+    // Busca o aluno por CPF e exibe um sub-menu para editar seus atributos
     @Override
     public void alterar(Scanner sc) {
         if (alunos.isEmpty()){
@@ -162,6 +171,7 @@ public class GerenciadorAluno implements Gerenciador {
         System.out.println("Aluno não encontrado");
     }
 
+    // Busca o aluno por CPF e o remove permanentemente da lista
     @Override
     public void excluir(Scanner sc) {
         if (alunos.isEmpty()){
