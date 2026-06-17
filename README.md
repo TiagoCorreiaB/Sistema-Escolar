@@ -91,11 +91,10 @@ Representa uma disciplina escolar e define quanto se paga por hora nela.
 - **Atributos:**
   - `nome` (`String`): Identifica qual é a disciplina escolar (ex: Matemática, Física).
   - `valorHora` (`Double`): O valor monetário pago pela hora-aula desta disciplina específica. 
-  - `idMateria` (`Integer`): Um identificador único que facilita a seleção da matéria no terminal durante o cadastro de professores.
   - `professores` (`ArrayList<Professor>`): Lista (`final`) que guarda a referência de todos os professores que ministram essa mesma disciplina.
-- **`Materia(...)` [Construtor]:** Atribui o nome, valor hora e id.
+- **`Materia(...)` [Construtor]:** Atribui o nome e valor hora.
 - **`adicionarProfessor(Professor professor)`:** Associa um objeto `Professor` na lista interna `professores` da disciplina.
-- **Getters e Setters:** `getProfessores()`, `getNome()`, `setNome()`, `getValorHora()`, `setValorHora()`, `getIdMateria()`, `setIdMateria()`.
+- **Getters e Setters:** `getProfessores()`, `getNome()`, `setNome()`, `getValorHora()`, `setValorHora()`.
 - **`toString()`:** Retorna o nome da matéria concatenado com o valor de sua hora. Ex: `Matematica(R$60.0/hora)`.
 
 #### Classe `Professor`

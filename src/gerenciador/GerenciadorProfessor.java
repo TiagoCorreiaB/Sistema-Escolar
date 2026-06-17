@@ -38,10 +38,9 @@ public class GerenciadorProfessor implements Gerenciador {
         System.out.print("Digite a carga horaria deste professor (em horas): ");
         double horas = sc.nextDouble();
 
-        System.out.print("---- Selecione a materia que ele atua ----");
-
+        System.out.println("---- Selecione a materia que ele atua ----");
         System.out.println(" ---------------------------- ");
-        System.out.println("|     ESCOLHA A DISCIPLINA    |");
+        System.out.println("|    ESCOLHA A DISCIPLINA    |");
         System.out.println(" ---------------------------- ");
         System.out.println("| 1 - Matematica             |");
         System.out.println("| 2 - Português              |");
@@ -59,13 +58,10 @@ public class GerenciadorProfessor implements Gerenciador {
 
         sc.nextLine();
 
-        for (Materia materia : materias) {
-            if (materia.getIdMateria().equals(disciplina)) {
-                Professor professor = new Professor(nome, idade, cpf, email, horas, Status.ATIVO, materia);
-                professores.add(professor);
-                materia.adicionarProfessor(professor);
-            }
-        }
+        Materia materia = materias.get(--disciplina);
+        Professor professor = new Professor(nome, idade, cpf, email, horas, Status.ATIVO, materia);
+        professores.add(professor);
+        materia.adicionarProfessor(professor);
     }
 
     // Exibe todos os professores formatados ou busca por um CPF específico
@@ -135,7 +131,7 @@ public class GerenciadorProfessor implements Gerenciador {
 
                 do {
                     System.out.println(" -------------------------------- ");
-                    System.out.println("| ESCOLHA O QUE ALTERAR          |");
+                    System.out.println("|     ESCOLHA O QUE ALTERAR      |");
                     System.out.println(" -------------------------------- ");
                     System.out.println("| 1 - Nome                       |");
                     System.out.println("| 2 - Idade                      |");
@@ -177,7 +173,7 @@ public class GerenciadorProfessor implements Gerenciador {
                             break;
                         case 5:
                             System.out.println(" ---------------------------- ");
-                            System.out.println("| ESCOLHA O NOVO STATUS      |");
+                            System.out.println("|   ESCOLHA O NOVO STATUS    |");
                             System.out.println(" ---------------------------- ");
                             System.out.println("| 1 - ATIVO                  |");
                             System.out.println("| 2 - FÉRIAS                 |");

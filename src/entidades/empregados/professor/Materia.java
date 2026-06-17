@@ -6,15 +6,13 @@ public class Materia {
 
     private String nome;
     private Double valorHora; //Cada materia tem seu proprio valor que pode ser pago a hora
-    private Integer idMateria;
     private final ArrayList<Professor> professores = new ArrayList<>();
 
     // Construtor principal da Materia
-    // Inicializa o nome, valor por hora e ID único
-    public Materia(String nome, Double valorHora, Integer idMateria) {
+    // Inicializa o nome e valor por hora
+    public Materia(String nome, Double valorHora) {
         this.nome = nome;
         this.valorHora = valorHora;
-        this.idMateria = idMateria;
     }
 
     // Vincula um professor a esta matéria
@@ -50,18 +48,6 @@ public class Materia {
     public void setValorHora(Double valorHora) {
 
         this.valorHora = valorHora;
-    }
-
-    // Retorna o ID identificador da matéria
-    public Integer getIdMateria() {
-
-        return idMateria;
-    }
-
-    // Define um novo ID para a matéria
-    public void setIdMateria(Integer idMateria) {
-
-        this.idMateria = idMateria;
     }
 
     @Override
