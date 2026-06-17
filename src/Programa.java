@@ -19,11 +19,11 @@ public class Programa {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-        Materia m1 = new Materia("Matematica", 60.0, 1);
-        Materia m2 = new Materia("Português", 54.6, 2);
-        Materia m3 = new Materia("Historia", 50.0, 3);
-        Materia m4 = new Materia("Fisica", 56.5, 4);
-        Materia m5 = new Materia("Geografia", 48.9, 5);
+        Materia m1 = new Materia("Matematica", 60.0);
+        Materia m2 = new Materia("Português", 54.6);
+        Materia m3 = new Materia("Historia", 50.0);
+        Materia m4 = new Materia("Fisica", 56.5);
+        Materia m5 = new Materia("Geografia", 48.9);
         List<Materia> materias = new ArrayList<>(Arrays.asList(m1, m2, m3, m4, m5));
 
         List<Aluno> alunosIniciais = new ArrayList<>(Arrays.asList(

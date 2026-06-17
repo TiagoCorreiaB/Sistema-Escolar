@@ -59,13 +59,10 @@ public class GerenciadorProfessor implements Gerenciador {
 
         sc.nextLine();
 
-        for (Materia materia : materias) {
-            if (materia.getIdMateria().equals(disciplina)) {
-                Professor professor = new Professor(nome, idade, cpf, email, horas, Status.ATIVO, materia);
-                professores.add(professor);
-                materia.adicionarProfessor(professor);
-            }
-        }
+        Materia materia = materias.get(--disciplina);
+        Professor professor = new Professor(nome, idade, cpf, email, horas, Status.ATIVO, materia);
+        professores.add(professor);
+        materia.adicionarProfessor(professor);
     }
 
     // Exibe todos os professores formatados ou busca por um CPF específico
